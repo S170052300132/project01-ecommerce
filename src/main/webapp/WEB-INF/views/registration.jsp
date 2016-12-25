@@ -7,6 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-this is the registration page
+ Create Account
+ 
+ <form action="">
+ 
+ Your Name:<input type="text" name="id"> <br>
+ Email:<input type="text" name="mail ID"> <br>
+ Password:<input type="password"  name="password"> <br>
+ Password Again:<input type="password" name="password"> <br>
+ <input type="submit" value="Create Your Account">
+ 
+ </form> 
 </body>
 </html>

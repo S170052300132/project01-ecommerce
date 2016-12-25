@@ -7,7 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-${msg}
+
+	Sign in to shopping cart website :
+	
+	<form action="">
+	
+ Username or email address:	<input type="text" name="id"> <br>
+	
+	Password :<input type="password" name="password"> <br>
+	
+	<input type="submit" value="sign in">
+	
+	</form>
 
 
 </body>

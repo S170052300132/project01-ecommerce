@@ -1,4 +1,4 @@
-package com.niitstudent.cartProject.controller;
+ package com.niitstudent.cartProject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +19,20 @@ public class HomeController {
   @RequestMapping("/login")
   public ModelAndView showLoginPage()
   { 
-	 ModelAndView mv = new ModelAndView("login");
+	 ModelAndView mv = new ModelAndView("home");
 	 mv.addObject("msg", "you clicked the login link");
+	 mv.addObject("showLoginPage", "true");
 	 
 	  return mv;
   }
 
   @RequestMapping("/register")
-  public String showRegistrationPage()
+  public ModelAndView showRegistrationPage()
   {
-	  return "registration";
+	  ModelAndView mv = new ModelAndView("home");
+		 mv.addObject("msg", "you clicked the registration link");
+		 mv.addObject("showRegistrationPage", "true");
+	  return mv;
+	  
   }
 }
