@@ -1,16 +1,21 @@
 package com.niitstudent.cartProject.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niitstudent.cartProjectBackEnd.dao.UserDAO;
-import com.niitstudent.cartProjectBackEnd.daoimplement.UserDAOImpl;
+import com.niitstudent.cartProjectBackEnd.domainobj.User;
 
 @Controller
-public class HomeController {
 
+public class HomeController {
+	@Autowired
+	UserDAO userDAO;
+	@Autowired
+	User user;
 	@RequestMapping("/")
 	public String homePage() {
 		return "home";
@@ -34,13 +39,12 @@ public class HomeController {
 
 	}
 	@RequestMapping("/validate")
-	public ModelAndView validate(@RequestParam("uname")  String id, @RequestParam("pass") String pwd)
+	public ModelAndView validate(@RequestParam("id")  String id, @RequestParam("password") String pwd)
 	{
 	ModelAndView mv = new ModelAndView("home");
 	
-	UserDAO userDAO = new UserDAOImpl();
 	
-	if (userDAO.isValidInfo(id,pwd)== true)
+	if (userDAO.validate(id,pwd)!=null)
 	{
 		mv.addObject("successMsg","You have logged in successfully");
 	}

@@ -8,14 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>online shopping</title>
 </head>
-<style>
-p {
-	color: red;
-	text-align: center;
-}
-</style>
+
 <body>
-	<p>welcome to online shopping</p>
+	<marquee><font size="5" color="#0000ee">Wishing You a STYLISH and COMFORTABLE 2017</font><br><center>
+	<font size="3" color="#ff0000">CHEERS!!</font></center></marquee>
 	<br>
 	<c:if test="${empty successMsg}">
 	<b> <a href="login"> LOGIN </a></b>
@@ -23,13 +19,13 @@ p {
 	<b><a href="register"> REGISTER </a></b>
 	<hr>
 	</c:if>
-	<p>${successMsg}</p>
+	<center><b>${successMsg}</b></center>
 	<c:if test="${showLoginPage}">
 		<jsp:include page="login.jsp"></jsp:include>
 	</c:if>
 
 	<c:if test="${not empty errorMsg}">
-		<p>${errorMsg}</p>
+		<center><b><font size="2" color="blue"><u>${errorMsg}</u></font></b></center>
 		<jsp:include page="login.jsp"></jsp:include>
 	</c:if>
 	<c:if test="${showRegistrationPage}">
