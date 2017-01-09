@@ -39,12 +39,12 @@ public class HomeController {
 
 	}
 	@RequestMapping("/validate")
-	public ModelAndView validate(@RequestParam("id")  String id, @RequestParam("password") String pwd)
+	public ModelAndView validate(@RequestParam("id")  String id, @RequestParam("password") String password)
 	{
 	ModelAndView mv = new ModelAndView("home");
 	
 	
-	if (userDAO.validate(id,pwd)!=null)
+	if (userDAO.validate(id,password)!=null)
 	{
 		mv.addObject("successMsg","You have logged in successfully");
 	}
