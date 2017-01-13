@@ -10,29 +10,42 @@
 </head>
 
 <body>
-	<marquee><font size="5" color="#0000ee">Wishing You a STYLISH and COMFORTABLE 2017</font><br><center>
-	<font size="3" color="#ff0000">CHEERS!!</font></center></marquee>
+	<marquee>
+		<font size="5" color="#0000ee">Wishing You a STYLISH and
+
+			COMFORTABLE 2017</font><br>
+		<center>
+			<font size="3" color="#ff0000">CHEERS!!</font>
+		</center>
+	</marquee>
 	<br>
+			<jsp:include page="menu.jsp"></jsp:include>
+	
 	<c:if test="${empty successMsg}">
-	<b> <a href="login"> LOGIN </a></b>
-	<br>
-	<b><a href="register"> REGISTER </a></b>
-	<hr>
+		<b> <a href="login"> LOGIN </a></b>
+		<br>
+		<b><a href="register"> REGISTER </a></b>
+		<hr>
 	</c:if>
-	<center><b>${successMsg}</b></center>
+	<center>
+		<b>${successMsg}</b>
+	</center>
 	<c:if test="${showLoginPage}">
 		<jsp:include page="login.jsp"></jsp:include>
 	</c:if>
 
 	<c:if test="${not empty errorMsg}">
-		<center><b><font size="2" color="blue"><u>${errorMsg}</u></font></b></center>
-		<jsp:include page="login.jsp"></jsp:include>
+		<center>
+			<b><font size="2" color="blue"><u>${errorMsg} </u></font></b>
+		</center>
+		<jsp:include page="403.jsp"></jsp:include>
 	</c:if>
 	<c:if test="${showRegistrationPage}">
 		<jsp:include page="registration.jsp"></jsp:include>
-	</c:if>
-
-
-
+	</c:if>	
+	
+			<jsp:include page="footer.jsp"></jsp:include>
+	
+	
 </body>
 </html>

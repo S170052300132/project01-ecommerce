@@ -38,6 +38,11 @@ public class HomeController {
 		return mv;
 
 	}
+	@RequestMapping("/aboutus")
+	public String showAbout()
+	{
+		return "aboutus";
+	}
 	@RequestMapping("/validate")
 	public ModelAndView validate(@RequestParam("id")  String id, @RequestParam("password") String password)
 	{
