@@ -4,16 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>About Us</title>
+<title>Upload file request</title>
 </head>
 <body>
-<pre>
-ABOUT US:
 
-shopOnwheels is a young company that aims to provide good quality branded products.
-We cater to the fashion needs of men, women and kids.
-At our online store we strive to achieve the highest level of Customer Satisfaction possible.
+	<form method="POST" action="uploadFile" enctype="multipart/form-data">
+		File to upload: <input type="file" name="file">
+ 
+		Name: <input type="text" name="name">
+ 
+ 
+		<!--  <input type="submit" value="Upload"> Press here to upload the file! -->
+	</form>	
 
-</pre>
 </body>
 </html>

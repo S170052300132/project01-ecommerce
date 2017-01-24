@@ -31,8 +31,8 @@
 						<td><input type="text" name="lname" value="" /></td>
 					</tr>
 					<tr>
-						<td>Date of birth</td>
-						<td><input type="text" name="dob" value="" /></td>
+						<td>Mobile No.</td>
+						<td><input type="text" name="mob" value="" /></td>
 					</tr>
 					<tr>
 						<td>Nationality</td>
