@@ -1,18 +1,12 @@
 package com.niitstudent.cartProject.controller;
 
 import java.util.List;
-import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.niitstudent.cartProjectBackEnd.dao.CartDAO;
 import com.niitstudent.cartProjectBackEnd.dao.CategoryDAO;
-import com.niitstudent.cartProjectBackEnd.dao.ProductDAO;
 import com.niitstudent.cartProjectBackEnd.dao.SupplierDAO;
 import com.niitstudent.cartProjectBackEnd.dao.UserDAO;
+import com.niitstudent.cartProjectBackEnd.domainobj.Cart;
 import com.niitstudent.cartProjectBackEnd.domainobj.Category;
-import com.niitstudent.cartProjectBackEnd.domainobj.Product;
 import com.niitstudent.cartProjectBackEnd.domainobj.Supplier;
 import com.niitstudent.cartProjectBackEnd.domainobj.User;
 
@@ -47,6 +40,11 @@ public class UserController {
 
 	@Autowired
 	private Category category;
+	@Autowired
+	private CartDAO cartDAO;
+
+	@Autowired
+	private Cart cart;
 
 	@Autowired
 	private SupplierDAO supplierDAO;
@@ -87,9 +85,9 @@ public class UserController {
 				log.debug("Logged in as User");
 				mv.addObject("isAdmin", "false");
 				//myCart = cartDAO.list(userID);
-				mv.addObject("myCart", myCart);
+				mv.addObject("mycart", cart);
 				// Fetch the myCart list based on user ID
-				List<MyCart> cartList = cartDAO.list(userID);
+				List<Cart> cartList = cartDAO.list(userID);
 				mv.addObject("cartList", cartList);
 				mv.addObject("cartSize", cartList.size());
 			}
@@ -118,13 +116,7 @@ public class UserController {
 		mv.addObject("logoutMessage", "You successfully logged out");
 		mv.addObject("loggedOut", "true");
 		
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		    if (auth != null){    
-		        new SecurityContextLogoutHandler().logout(request, response, auth);
-		    }
-		  //  return "redirect:/login?logout";
-		    
+		 
 		    
 		log.debug("Ending of the method logout");
 		return mv;
