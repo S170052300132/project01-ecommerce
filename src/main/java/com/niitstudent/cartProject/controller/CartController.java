@@ -40,14 +40,6 @@ public class CartController {
 	}
 	
 	
-	/*@RequestMapping(value = "/carts", method = RequestMethod.GET)
-	public String listCarts(Model model) {
-		model.addAttribute("cart", new Cart());
-		model.addAttribute("cartList", this.cartDAO.list());
-		return "cart";
-	}*/
-	
-	
 	//For add and update cart both
 	@RequestMapping(value= "/cart/add/{id}", method = RequestMethod.GET)
 	public String addToCart(@PathVariable("id") String id){
