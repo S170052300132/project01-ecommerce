@@ -1,123 +1,74 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<link rel="stylesheet" href="<c:url value="resources/css/admin.css" />">
-
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Product Page</title>
-
+<meta charset="UTF-8">
+<title>Product</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
 </head>
 <body>
-	<h1>Add a Product</h1>
+ 
+   <jsp:include page="header.jsp" />
+   <jsp:include page="menu.jsp" />
+ 
+   <div class="page-title">Product</div>
+  
+   <c:if test="${not empty errorMessage }">
+     <div class="error-message">
+         ${errorMessage}
+     </div>
+   </c:if>
+ 
+   <form:form modelAttribute="productForm" method="POST" enctype="multipart/form-data">
+       <table style="text-align:left;">
+<tr>
+<td>Code *</td>
+<td style="color:red;">
+                  <c:if test="${not empty productForm.code}">
+                       <form:hidden path="code"/>
+                       ${productForm.code}
+                  </c:if>
+                  <c:if test="${empty productForm.code}">
+                       <form:input path="code" />
+                       <form:hidden path="newProduct" />
+                  </c:if>
+               </td>
+<td><form:errors path="code" class="error-message" /></td>
+</tr>
 
-	<c:url var="addAction" value="/product/add"></c:url>
-
-	<form:form action="${addAction}" commandName="product"
-		enctype="multipart/form-data" method="POST">
-		<table>
-			<tr>
-				<td><form:label path="id">
-						<spring:message text="ID" />
-					</form:label></td>
-				<c:choose>
-					<c:when test="${!empty product.id}">
-						<td><form:input path="id" disabled="true" readonly="true" />
-						</td>
-					</c:when>
-
-					<c:otherwise>
-						<td><form:input path="id" pattern=".{6,7}" required="true"
-								title="id should contains 6 to 7 characters" /></td>
-					</c:otherwise>
-				</c:choose>
-			<tr>
-				<form:input path="id" hidden="true" />
-				<td><form:label path="name">
-						<spring:message text="Name" />
-					</form:label></td>
-				<td><form:input path="name" required="true" /></td>
-			</tr>
-
-
-			<tr>
-				<td><form:label path="price">
-						<spring:message text="Price" />
-					</form:label></td>
-				<td><form:input path="price" required="true" /></td>
-			</tr>
-
-			<tr>
-				<td><form:label path="description">
-						<spring:message text="Description" />
-					</form:label></td>
-				<td><form:input path="description" required="true" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="supplier">
-						<spring:message text="Supplier" />
-					</form:label></td>
-				<td><form:select path="supplier.name" items="${supplierList}"
-						itemValue="name" itemLabel="name" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="category">
-						<spring:message text="Category" />
-					</form:label></td>
-				<td><form:select path="category.name" items="${categoryList}"
-						itemValue="name" itemLabel="name" /></td>
-			</tr>
-
-			<tr>
-				<td align="left"><form:label path="image">
-						<spring:message text="Image" />
-					</form:label></td>
-				<td align="left"><form:input type="file" path="image" /></td>
-			</tr>
-
-			<tr>
-				<td colspan="2"><c:if test="${!empty product.name}">
-						<input type="submit" value="<spring:message text="Edit Product"/>" />
-					</c:if> <c:if test="${empty product.name}">
-						<input type="submit" value="<spring:message text="Add Product"/>" />
-					</c:if></td>
-			</tr>
-		</table>
-
-	</form:form>
-	<br>
-
-
-
-	<h3>Product List</h3>
-	<c:if test="${!empty productList}">
-		<table class="tg">
-			<tr>
-				<th width="80">Product ID</th>
-				<th width="120">Product Name</th>
-				<th width="200">Product Description</th>
-				<th width="80">Price</th>
-				<th width="80">Product Category</th>
-				<th width="80">Product Supplier</th>
-				
-				<th width="60">Edit</th>
-				<th width="60">Delete</th>
-				<th width="80">Product Supplier</th>
-			</tr>
-			<c:forEach items="${productList}" var="product">
-				<tr>
-					
-					<td>${product.id}</td>
-					<td>${product.name}</td>
-					<td>${product.description}</td>
-					<td>${product.price}</td>
-					<td>${product.category.name}</td>
-					<td>${product.supplier.name}</td>
-					<td><a href="<c:url value='product/edit/${product.id}' />">Edit</a></td>
-					<td><a href="<c:url value='product/remove/${product.id}' />">Delete</a></td>
-				</tr>
-			</c:forEach>
-		</table>	
-	</c:if>
+<tr>
+<td>Name *</td>
+<td><form:input path="name" /></td>
+<td><form:errors path="name" class="error-message" /></td>
+</tr>
+<tr>
+<td>Price *</td>
+<td><form:input path="price" /></td>
+<td><form:errors path="price" class="error-message" /></td>
+</tr>
+<tr>
+<td>Image</td>
+<td>
+               <img src="${pageContext.request.contextPath}/productImage?code=${productForm.code}" width="100"/></td>
+<td> </td>
+</tr>
+<tr>
+<td>Upload Image</td>
+<td><form:input type="file" path="fileData"/></td>
+<td> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><input type="submit" value="Submit" /> <input type="reset"value="Reset" /></td>
+</tr>
+</table>
+   </form:form>
+ 
+ 
+ 
+ 
+   <jsp:include page="footer.jsp" />
+ 
 </body>
 </html>

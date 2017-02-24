@@ -38,7 +38,7 @@
 		<center>
 			<b><font size="2" color="blue"><u>${errorMsg} </u></font></b>
 		</center>
-		<jsp:include page="403.jsp"></jsp:include>
+		<jsp:include page="login.jsp"></jsp:include>
 	</c:if>
 	<c:if test="${showRegistrationPage}">
 		<jsp:include page="registration.jsp"></jsp:include>

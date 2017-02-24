@@ -1,44 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ 
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+ 
+<title>Login</title>
+ 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
+ 
 </head>
 <body>
-	<form action="validate">
-
-		<center>
-			<table border="1" width="30%" cellpadding="3">
-					<tr>
-						<th colspan="2">Please Login!!!</th>
-					</tr>
-				<tbody>
-					<tr>
-						<td>UserName</td>
-						<td><input type="text" name="id" value="" /></td>
-					</tr>
-					<tr>
-						<td>Password</td>
-						<td><input type="password" name="password" value="" /></td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="Login" /></td>
-						<td><input type="reset" value="Reset" /></td>
-					</tr>
-					<tr>
-						<td colspan="2">Yet Not Registered!! <a href="register">Register
-								Here</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</center>
-
-
-
-	</form>
-
-
+ 
+ 
+   <jsp:include page="header.jsp" />
+   <jsp:include page="menu.jsp" />
+ 
+ 
+ 
+   <div class="page-title">Login (For Employee, Manager)</div>
+ 
+   <div class="login-container">
+ 
+       <h3>Enter username and password</h3>
+       <br>
+       <!-- /login?error=true -->
+       <c:if test="${param.error == 'true'}">
+           <div style="color: red; margin: 10px 0px;">
+ 
+               Login Failed!!!<br /> Reason :
+               ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+ 
+           </div>
+       </c:if>
+ 
+       <form method="POST"
+           action="${pageContext.request.contextPath}/j_spring_security_check">
+           <table>
+               <tr>
+                   <td>User Name *</td>
+                   <td><input name="userName" /></td>
+               </tr>
+ 
+               <tr>
+                   <td>Password *</td>
+                   <td><input type="password" name="password" /></td>
+               </tr>
+ 
+               <tr>
+                   <td>&nbsp;</td>
+                   <td><input type="submit" value="Login" /> <input type="reset"
+                       value="Reset" /></td>
+               </tr>
+           </table>
+       </form>
+ 
+       <span class="error-message">${error }</span>
+ 
+   </div>
+ 
+ 
+   <jsp:include page="footer.jsp" />
+ 
 </body>
 </html>

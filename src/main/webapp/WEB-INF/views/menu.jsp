@@ -1,23 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<style>
-p {
-	text-align: right;
-	margin: 10px 5px;
-}
-</style>
-
-</head>
-<body>
-	<p>
-		<a href="http://localhost:8080/cartProject/">Home</a>  | 
-		 <a href="aboutus">About Us </a> | <a href="contactus"> Contact Us </a>
-	</p>
-
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>   
+ 
+ 
+<div class="menu-container">
+  
+   <a href="${pageContext.request.contextPath}/">Home</a>
+   |
+   <a href="${pageContext.request.contextPath}/productList">
+      Product List
+   </a>
+   |
+   <a href="${pageContext.request.contextPath}/shoppingCart">
+      My Cart
+   </a>
+   |
+   <security:authorize access="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+     <a href="${pageContext.request.contextPath}/orderList">
+         Order List
+     </a>
+     |
+   </security:authorize>
+   
+   <security:authorize access="hasRole('ROLE_MANAGER')">
+         <a href="${pageContext.request.contextPath}/product">
+                        Create Product
+         </a>
+         |
+   </security:authorize>
+  
+</div>
